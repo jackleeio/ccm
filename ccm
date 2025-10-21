@@ -21,8 +21,25 @@ show_status() {
     elif [[ "$current" == *"glm"* ]]; then
         echo "✓ GLM-4.6"
     else
-        echo "⚠ 未知: $current"
+        echo "⚠ Unknown model: $current"
     fi
+}
+
+show_help() {
+    echo ""
+    echo "📖 Claude Code Router Model Switcher"
+    echo ""
+    echo "Usage:"
+    echo "  ccm           Show current model status"
+    echo "  ccm -c        Switch to Claude Sonnet 4.5"
+    echo "  ccm -g        Switch to GLM-4.6"
+    echo "  ccm -h        Show this help message"
+    echo ""
+    echo "Examples:"
+    echo "  ccm           # Check current model"
+    echo "  ccm -c        # Use Claude"
+    echo "  ccm -g        # Use GLM"
+    echo ""
 }
 
 switch_model() {
@@ -40,17 +57,26 @@ switch_model() {
 case "$1" in
     -c)
         switch_model "openrouter,anthropic/claude-sonnet-4.5"
-        echo "✅ Claude Sonnet 4.5"
+        echo "✅ Switched to: Claude Sonnet 4.5"
         echo ""
         ccr restart
         ;;
     -g)
         switch_model "openrouter,z-ai/glm-4.6"
-        echo "✅ GLM-4.6"
+        echo "✅ Switched to: GLM-4.6"
         echo ""
         ccr restart
         ;;
-    *)
+    -h|--help)
         show_status
+        show_help
+        ;;
+    "")
+        show_status
+        ;;
+    *)
+        echo "❌ Unknown option: $1"
+        show_help
+        exit 1
         ;;
 esac
