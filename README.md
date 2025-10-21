@@ -50,6 +50,42 @@ ccm -g
 ccm
 ```
 
+### Claude Code Integration
+
+You can create slash commands in your Claude Code project to switch models directly within Claude:
+
+**1. Create `.claude/commands/claude.md`:**
+```markdown
+---
+description: Switch to Claude Sonnet 4.5 model
+---
+
+Execute the command to switch Claude Code Router to Claude Sonnet 4.5 model:
+
+\`\`\`bash
+ccm -c
+\`\`\`
+```
+
+**2. Create `.claude/commands/glm.md`:**
+```markdown
+---
+description: Switch to GLM-4.6 model
+---
+
+Execute the command to switch Claude Code Router to GLM-4.6 model:
+
+\`\`\`bash
+ccm -g
+\`\`\`
+```
+
+**3. Use slash commands in Claude Code:**
+- Type `/claude` to switch to Claude Sonnet 4.5
+- Type `/glm` to switch to GLM-4.6
+
+This allows you to seamlessly switch between models while working in Claude Code!
+
 ## Configuration
 
 The script automatically detects and modifies the Claude Code Router configuration file at:
